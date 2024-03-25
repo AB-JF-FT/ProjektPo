@@ -1,5 +1,8 @@
 package ui;
 
+//Main author: Andrzej Brzostowicz
+//Sub author: Jakub Fabiński
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
