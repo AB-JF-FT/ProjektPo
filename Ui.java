@@ -1,7 +1,6 @@
 package ui;
 
-//Main author: Andrzej Brzostowicz
-//Sub author: Jakub Fabiński
+//Author: Andrzej Brzostowicz
 
 import javax.swing.*;
 import java.awt.*;
