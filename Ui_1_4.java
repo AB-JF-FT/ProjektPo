@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 /**
  * Graphical User Interface for displaying a graph and allowing user input.
@@ -84,12 +86,17 @@ public class Ui extends JFrame implements ActionListener {
         // Prompt the user to choose a file location to save the image
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Save Graph");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("JPEG files", "jpg")); // Set filter to JPG files only
         int userSelection = fileChooser.showSaveDialog(this);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
             try {
-                // Save the buffered image as a PNG file
-                ImageIO.write(image, "png", fileToSave);
+                // Append ".jpg" extension if not provided
+                if (!fileToSave.getAbsolutePath().toLowerCase().endsWith(".jpg")) {
+                    fileToSave = new File(fileToSave.getAbsolutePath() + ".jpg");
+                }
+                // Save the buffered image as a JPG file
+                ImageIO.write(image, "jpg", fileToSave);
                 JOptionPane.showMessageDialog(this, "Graph saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Error saving graph: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
