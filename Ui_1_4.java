@@ -43,7 +43,7 @@ public class Ui extends JFrame implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (useInitialValues.isSelected()) {
-                textField1.setText("1.0");
+                textField1.setText("2.0");
                 textField2.setText("1.0");
                 textField3.setText("1.0");
                 textField4.setText("1.0");
