@@ -111,26 +111,34 @@ public class Ui extends JFrame implements ActionListener {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToSave))) {
                 String[] headers = {"Time", "Moc Fizjologiczna", "Moc Jałowa", "Moc Użytkowa"};
 
-                // Calculate the maximum width for each column including the headers
+             // Initialize the maximum width for each column with header lengths
                 int maxTimeWidth = headers[0].length();
                 int maxPowerWidth = headers[1].length();
                 int maxPowerJWidth = headers[2].length();
                 int maxPowerUWidth = headers[3].length();
 
-                // Include headers in calculating the maximum width for each column
-                for (int i = 0; i < headers.length; i++) {
-                    maxTimeWidth = Math.max(maxTimeWidth, headers[i].length());
-                    maxPowerWidth = Math.max(maxPowerWidth, headers[i].length());
-                    maxPowerJWidth = Math.max(maxPowerJWidth, headers[i].length());
-                    maxPowerUWidth = Math.max(maxPowerUWidth, headers[i].length());
-                }
-
-                // Calculate the maximum width for each column based on data
-                for (int i = 0; i < graph.time.length; i++) {
-                    maxTimeWidth = Math.max(maxTimeWidth, String.valueOf(graph.time[i]).length());
-                    maxPowerWidth = Math.max(maxPowerWidth, String.valueOf(graph.power[i]).length());
-                    maxPowerJWidth = Math.max(maxPowerJWidth, String.valueOf(graph.powerJ[i]).length());
-                    maxPowerUWidth = Math.max(maxPowerUWidth, String.valueOf(graph.powerU[i]).length());
+             // Calculate the maximum width for each column based on headers and data
+                for (int i = 0; i < headers.length; i++) { // Loop through each column
+                    for (int j = 0; j < graph.time.length; j++) { // Loop through each data point in the column
+                        switch (i) { // Determine which column we are currently processing
+                            case 0:
+                                // For the time column, find the maximum width among all time values
+                                maxTimeWidth = Math.max(maxTimeWidth, String.valueOf(graph.time[j]).length());
+                                break;
+                            case 1:
+                                // For the power column, find the maximum width among all power values
+                                maxPowerWidth = Math.max(maxPowerWidth, String.valueOf(graph.power[j]).length());
+                                break;
+                            case 2:
+                                // For the powerJ column, find the maximum width among all powerJ values
+                                maxPowerJWidth = Math.max(maxPowerJWidth, String.valueOf(graph.powerJ[j]).length());
+                                break;
+                            case 3:
+                                // For the powerU column, find the maximum width among all powerU values
+                                maxPowerUWidth = Math.max(maxPowerUWidth, String.valueOf(graph.powerU[j]).length());
+                                break;
+                        }
+                    }
                 }
 
                 // Adjust widths for spacing and delimiter
