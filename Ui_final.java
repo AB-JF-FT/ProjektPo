@@ -17,6 +17,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 /**
  * The Ui class represents the graphical user interface for the power simulation application.
@@ -279,15 +280,28 @@ public class Ui extends JFrame implements ActionListener {
             chart.getXYPlot().getRenderer().setSeriesPaint(dataset.getSeriesCount() - 1, green);
             repaint();
 
-            equationLabel1.setText("Praca Fizjologiczna = " + Graph.integral);
+         // Create DecimalFormat object for formatting to two decimal places
+            DecimalFormat df = new DecimalFormat("0.00");
+
+            // Format the integral values to two decimal places
+            String integralFormatted = df.format(Graph.integral);
+            String integralJFormatted = df.format(Graph.integralJ);
+            String integralUFormatted = df.format(Graph.integralU);
+
+            // Set the text of the labels with the formatted integral values
+            equationLabel1.setText("Praca Fizjologiczna = " + integralFormatted);
+            equationLabel2.setText("Praca Jałowa = " + integralJFormatted);
+            equationLabel3.setText("Praca Użytkowa = " + integralUFormatted);
+
+            // Set label colors and backgrounds
             equationLabel1.setForeground(blue);
             equationLabel1.setOpaque(true);
             equationLabel1.setBackground(Color.GRAY);
-            equationLabel2.setText("Praca Jałowa = " + Graph.integralJ);
+
             equationLabel2.setForeground(red);
             equationLabel2.setOpaque(true);
             equationLabel2.setBackground(Color.GRAY);
-            equationLabel3.setText("Praca Użytkowa= " + Graph.integralU);
+
             equationLabel3.setForeground(green);
             equationLabel3.setOpaque(true);
             equationLabel3.setBackground(Color.GRAY);
